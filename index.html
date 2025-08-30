@@ -1,415 +1,122 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Coastal Threat Alert System</title>
-    <link rel="stylesheet" href="style.css">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Coastal Threat Alert System</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
 </head>
 <body>
-    <!-- Top Navigation -->
-    <nav class="navbar">
-        <div class="container">
-            <div class="navbar-brand">
-                <div class="logo">
-                    <i class="fas fa-wave-square"></i>
-                    <span>CoastalAlert</span>
-                </div>
-            </div>
-            <div class="navbar-menu">
-                <a href="#dashboard" class="nav-link active" data-section="dashboard">
-                    <i class="fas fa-tachometer-alt"></i> Dashboard
-                </a>
-                <a href="#report" class="nav-link" data-section="report">
-                    <i class="fas fa-exclamation-triangle"></i> Report Threat
-                </a>
-                <a href="#alerts" class="nav-link" data-section="alerts">
-                    <i class="fas fa-bell"></i> Active Alerts
-                </a>
-                <a href="#evacuation" class="nav-link" data-section="evacuation">
-                    <i class="fas fa-map-marked-alt"></i> Evacuation Map
-                </a>
-                <a href="#authority" class="nav-link" data-section="authority">
-                    <i class="fas fa-shield-alt"></i> Authority Panel
-                </a>
-            </div>
-            <div class="navbar-actions">
-                <div class="language-selector">
-                    <select id="languageSelect" class="form-control">
-                        <option value="en" data-flag="🇺🇸">English</option>
-                        <option value="hi" data-flag="🇮🇳">हिंदी</option>
-                        <option value="ta" data-flag="🇮🇳">தமிழ்</option>
-                        <option value="mr" data-flag="🇮🇳">मराठी</option>
-                    </select>
-                </div>
-                <button class="btn btn--primary emergency-btn">
-                    <i class="fas fa-phone"></i> Emergency
-                </button>
-            </div>
+  <!-- Animated Background -->
+  <div class="ocean">
+    <div class="wave"></div>
+    <div class="wave"></div>
+  </div>
+
+  <!-- Top Navigation -->
+  <nav class="navbar">
+    <div class="container">
+      <div class="navbar-brand">
+        <div class="logo">
+          <i class="fas fa-water"></i>
+          <span>CoastalAlert</span>
         </div>
-    </nav>
-
-    <!-- Main Content -->
-    <main class="main-content">
-        <!-- Dashboard Section -->
-        <section id="dashboard" class="section active">
-            <div class="container">
-                <div class="section-header">
-                    <h1>Coastal Threat Dashboard</h1>
-                    <p class="section-subtitle">Real-time monitoring of coastal conditions and threats</p>
-                </div>
-
-                <!-- Alert Status Banner -->
-                <div class="alert-banner critical">
-                    <div class="alert-banner-content">
-                        <div class="alert-level">
-                            <i class="fas fa-exclamation-triangle"></i>
-                            <span class="alert-text">CRITICAL ALERT</span>
-                        </div>
-                        <div class="alert-message">
-                            Storm surge approaching Mumbai Coast - Immediate evacuation recommended
-                        </div>
-                        <button class="btn btn--primary btn--sm">View Details</button>
-                    </div>
-                </div>
-
-                <!-- Quick Stats -->
-                <div class="stats-grid">
-                    <div class="stat-card">
-                        <div class="stat-icon critical">
-                            <i class="fas fa-exclamation-triangle"></i>
-                        </div>
-                        <div class="stat-content">
-                            <div class="stat-number" id="activeThreats">3</div>
-                            <div class="stat-label">Active Threats</div>
-                        </div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-icon info">
-                            <i class="fas fa-users"></i>
-                        </div>
-                        <div class="stat-content">
-                            <div class="stat-number" id="communityReports">3</div>
-                            <div class="stat-label">Community Reports</div>
-                        </div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-icon warning">
-                            <i class="fas fa-home"></i>
-                        </div>
-                        <div class="stat-content">
-                            <div class="stat-number" id="evacuated">165</div>
-                            <div class="stat-label">People in Shelters</div>
-                        </div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-icon success">
-                            <i class="fas fa-shield-alt"></i>
-                        </div>
-                        <div class="stat-content">
-                            <div class="stat-number" id="sheltersOpen">2</div>
-                            <div class="stat-label">Shelters Open</div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Live Monitoring Data -->
-                <div class="monitoring-grid">
-                    <div class="card">
-                        <div class="card__header">
-                            <h3>Live Sensor Data</h3>
-                            <span class="status status--success">
-                                <i class="fas fa-circle"></i> Live
-                            </span>
-                        </div>
-                        <div class="card__body">
-                            <div id="sensorData" class="sensor-grid">
-                                <!-- Sensor data will be populated by JavaScript -->
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="card">
-                        <div class="card__header">
-                            <h3>Recent Community Reports</h3>
-                            <button class="btn btn--outline btn--sm">View All</button>
-                        </div>
-                        <div class="card__body">
-                            <div id="recentReports" class="reports-list">
-                                <!-- Recent reports will be populated by JavaScript -->
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Report Threat Section -->
-        <section id="report" class="section">
-            <div class="container">
-                <div class="section-header">
-                    <h1>Report Coastal Threat</h1>
-                    <p class="section-subtitle">Help protect your community by reporting threats you observe</p>
-                </div>
-
-                <div class="report-form-container">
-                    <form id="threatReportForm" class="threat-form">
-                        <div class="form-row">
-                            <div class="form-group">
-                                <label class="form-label" for="reporterName">Your Name</label>
-                                <input type="text" id="reporterName" class="form-control" required>
-                            </div>
-                            <div class="form-group">
-                                <label class="form-label" for="reporterType">You are a:</label>
-                                <select id="reporterType" class="form-control" required>
-                                    <option value="">Select type</option>
-                                    <option value="Fisherman">Fisherman</option>
-                                    <option value="Coastal Resident">Coastal Resident</option>
-                                    <option value="Tourist">Tourist</option>
-                                    <option value="Official">Government Official</option>
-                                    <option value="Other">Other</option>
-                                </select>
-                            </div>
-                        </div>
-
-                        <div class="form-row">
-                            <div class="form-group">
-                                <label class="form-label" for="location">Location</label>
-                                <input type="text" id="location" class="form-control" placeholder="Enter location or beach name" required>
-                            </div>
-                            <div class="form-group">
-                                <label class="form-label" for="threatType">Threat Type</label>
-                                <select id="threatType" class="form-control" required>
-                                    <option value="">Select threat type</option>
-                                    <option value="Oil Spill">Oil Spill</option>
-                                    <option value="Coastal Erosion">Coastal Erosion</option>
-                                    <option value="Unusual Tides">Unusual Tides</option>
-                                    <option value="Storm Damage">Storm Damage</option>
-                                    <option value="Other">Other</option>
-                                </select>
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label class="form-label" for="description">Description</label>
-                            <textarea id="description" class="form-control" rows="4" placeholder="Describe what you observed..." required></textarea>
-                        </div>
-
-                        <div class="form-row">
-                            <div class="form-group">
-                                <label class="form-label" for="priority">Priority Level</label>
-                                <select id="priority" class="form-control" required>
-                                    <option value="">Select priority</option>
-                                    <option value="Low">Low</option>
-                                    <option value="Medium">Medium</option>
-                                    <option value="High">High</option>
-                                    <option value="Critical">Critical</option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label class="form-label" for="photos">Photos (Optional)</label>
-                                <input type="file" id="photos" class="form-control" multiple accept="image/*">
-                                <small class="form-help">Upload photos to help verify the threat</small>
-                            </div>
-                        </div>
-
-                        <div class="gps-section">
-                            <button type="button" id="getLocation" class="btn btn--outline">
-                                <i class="fas fa-map-marker-alt"></i> Get GPS Coordinates
-                            </button>
-                            <span id="coordinates" class="coordinates-display"></span>
-                        </div>
-
-                        <div class="form-actions">
-                            <button type="submit" class="btn btn--primary btn--lg">
-                                <i class="fas fa-paper-plane"></i> Submit Report
-                            </button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </section>
-
-        <!-- Active Alerts Section -->
-        <section id="alerts" class="section">
-            <div class="container">
-                <div class="section-header">
-                    <h1>Active AI Threat Alerts</h1>
-                    <p class="section-subtitle">AI-powered threat detection and analysis</p>
-                </div>
-
-                <div id="alertsList" class="alerts-grid">
-                    <!-- AI alerts will be populated by JavaScript -->
-                </div>
-            </div>
-        </section>
-
-        <!-- Evacuation Map Section -->
-        <section id="evacuation" class="section">
-            <div class="container">
-                <div class="section-header">
-                    <h1>Evacuation Routes & Shelters</h1>
-                    <p class="section-subtitle">Find the nearest shelter and optimal evacuation route</p>
-                </div>
-
-                <div class="evacuation-content">
-                    <div class="map-container">
-                        <div id="evacuationMap" class="evacuation-map">
-                            <div class="map-placeholder">
-                                <i class="fas fa-map"></i>
-                                <p>Interactive Map</p>
-                                <p>Showing evacuation routes and shelter locations</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="evacuation-sidebar">
-                        <div class="card">
-                            <div class="card__header">
-                                <h3>Available Shelters</h3>
-                            </div>
-                            <div class="card__body">
-                                <div id="sheltersList" class="shelters-list">
-                                    <!-- Shelters will be populated by JavaScript -->
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="card">
-                            <div class="card__header">
-                                <h3>Evacuation Routes</h3>
-                            </div>
-                            <div class="card__body">
-                                <div id="routesList" class="routes-list">
-                                    <!-- Routes will be populated by JavaScript -->
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Authority Panel Section -->
-        <section id="authority" class="section">
-            <div class="container">
-                <div class="section-header">
-                    <h1>Authority Control Panel</h1>
-                    <p class="section-subtitle">Monitor and manage coastal threat response</p>
-                </div>
-
-                <div class="authority-grid">
-                    <div class="card">
-                        <div class="card__header">
-                            <h3>Threat Overview</h3>
-                            <span class="status status--error">
-                                <i class="fas fa-exclamation-triangle"></i> 3 Active
-                            </span>
-                        </div>
-                        <div class="card__body">
-                            <div id="authorityThreats" class="authority-threats">
-                                <!-- Authority threat list will be populated by JavaScript -->
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="card">
-                        <div class="card__header">
-                            <h3>Community Reports</h3>
-                            <button class="btn btn--outline btn--sm">Review All</button>
-                        </div>
-                        <div class="card__body">
-                            <div id="authorityReports" class="authority-reports">
-                                <!-- Authority reports will be populated by JavaScript -->
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="card">
-                        <div class="card__header">
-                            <h3>Issue New Alert</h3>
-                        </div>
-                        <div class="card__body">
-                            <form id="newAlertForm" class="new-alert-form">
-                                <div class="form-group">
-                                    <select class="form-control" required>
-                                        <option value="">Select threat type</option>
-                                        <option value="Storm Surge">Storm Surge</option>
-                                        <option value="Tsunami">Tsunami</option>
-                                        <option value="Cyclone">Cyclone</option>
-                                        <option value="Oil Spill">Oil Spill</option>
-                                    </select>
-                                </div>
-                                <div class="form-group">
-                                    <select class="form-control" required>
-                                        <option value="">Select severity</option>
-                                        <option value="Low">Low</option>
-                                        <option value="Medium">Medium</option>
-                                        <option value="High">High</option>
-                                        <option value="Critical">Critical</option>
-                                    </select>
-                                </div>
-                                <button type="submit" class="btn btn--primary">Issue Alert</button>
-                            </form>
-                        </div>
-                    </div>
-
-                    <div class="card">
-                        <div class="card__header">
-                            <h3>Resource Deployment</h3>
-                        </div>
-                        <div class="card__body">
-                            <div class="resource-stats">
-                                <div class="resource-item">
-                                    <span class="resource-label">Rescue Teams</span>
-                                    <span class="resource-value">8 Deployed</span>
-                                </div>
-                                <div class="resource-item">
-                                    <span class="resource-label">Emergency Vehicles</span>
-                                    <span class="resource-value">12 Active</span>
-                                </div>
-                                <div class="resource-item">
-                                    <span class="resource-label">Medical Units</span>
-                                    <span class="resource-value">5 Standby</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-    </main>
-
-    <!-- Success Modal -->
-    <div id="successModal" class="modal hidden">
-        <div class="modal-backdrop"></div>
-        <div class="modal-content">
-            <div class="modal-header">
-                <h3>Report Submitted Successfully</h3>
-                <button class="modal-close">&times;</button>
-            </div>
-            <div class="modal-body">
-                <div class="success-icon">
-                    <i class="fas fa-check-circle"></i>
-                </div>
-                <p>Your threat report has been submitted and will be reviewed by authorities.</p>
-                <p><strong>Report ID:</strong> <span id="reportId">CT-2025-001</span></p>
-            </div>
-            <div class="modal-footer">
-                <button class="btn btn--primary" onclick="closeModal()">Close</button>
-            </div>
-        </div>
-    </div>
-
-    <!-- Voice Alert Button -->
-    <div class="voice-alert-container">
-        <button id="voiceAlertBtn" class="voice-alert-btn">
-            <i class="fas fa-volume-up"></i>
-            <span>Play Voice Alert</span>
+      </div>
+      <div class="navbar-menu">
+        <a href="#dashboard" class="nav-link active">Dashboard</a>
+        <a href="#report" class="nav-link">Report</a>
+        <a href="#alerts" class="nav-link">Alerts</a>
+        <a href="#evacuation" class="nav-link">Evacuation</a>
+        <a href="#authority" class="nav-link">Authority</a>
+      </div>
+      <div class="navbar-actions">
+        <button class="btn btn--primary emergency-btn">
+          <i class="fas fa-phone"></i> Emergency
         </button>
+      </div>
     </div>
+  </nav>
 
-    <script src="app.js"></script>
+  <!-- Main Content -->
+  <main class="main-content">
+    <!-- Dashboard -->
+    <section id="dashboard" class="section active">
+      <div class="container">
+        <div class="section-header">
+          <h1>🌊 Coastal Threat Dashboard</h1>
+          <p>Real-time monitoring of coastal conditions and threats</p>
+        </div>
+
+        <!-- Alert Banner -->
+        <div class="alert-banner critical">
+          <div class="alert-banner-content">
+            <div class="alert-level">
+              <i class="fas fa-exclamation-triangle"></i>
+              <span>CRITICAL ALERT</span>
+            </div>
+            <div class="alert-message">
+              Storm surge approaching Mumbai Coast - Immediate evacuation recommended
+            </div>
+          </div>
+        </div>
+
+        <!-- Gamified Stats -->
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div class="stat-icon critical"><i class="fas fa-exclamation-triangle"></i></div>
+            <div class="stat-number" id="activeThreats">3</div>
+            <div class="stat-label">Active Threats</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon info"><i class="fas fa-users"></i></div>
+            <div class="stat-number" id="communityReports">3</div>
+            <div class="stat-label">Community Reports</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon success"><i class="fas fa-shield-alt"></i></div>
+            <div class="stat-number" id="xpPoints">0</div>
+            <div class="stat-label">Your XP</div>
+          </div>
+        </div>
+
+        <!-- Progress Bar -->
+        <div class="progress">
+          <div class="progress-fill" id="xpProgress"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Report Section -->
+    <section id="report" class="section">
+      <div class="container">
+        <h1>📢 Report Coastal Threat</h1>
+        <form id="threatReportForm" class="threat-form">
+          <input type="text" id="reporterName" placeholder="Your Name" required>
+          <select id="reporterType" required>
+            <option value="">You are a...</option>
+            <option value="Fisherman">Fisherman</option>
+            <option value="Resident">Resident</option>
+            <option value="Tourist">Tourist</option>
+          </select>
+          <input type="text" id="location" placeholder="Location" required>
+          <textarea id="description" placeholder="Describe threat..." required></textarea>
+          <button type="submit" class="btn btn--primary">Submit Report</button>
+        </form>
+      </div>
+    </section>
+
+    <!-- Badges -->
+    <section id="badges" class="section">
+      <div class="container">
+        <h1>🏅 Your Badges</h1>
+        <div class="badge-grid" id="badgeGrid">
+          <!-- Badges earned will appear here -->
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script src="app.js"></script>
 </body>
 </html>
